@@ -1,0 +1,74 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from LoginServiceService WSDL service -->
+
+  <service name="LoginService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service"/>
+      <parameter name="wsdlServiceElement" value="LoginServiceService"/>
+      <parameter name="schemaQualified" value="http://service,http://model"/>
+      <parameter name="wsdlServicePort" value="LoginService"/>
+      <parameter name="className" value="service.LoginServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="LoginService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="setUserBeanValues" qname="operNS:setUserBeanValues" xmlns:operNS="http://service" returnQName="retNS:setUserBeanValuesReturn" xmlns:retNS="http://service" returnType="rtns:User" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:rs" xmlns:pns="http://service" type="tns:anyType" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:user" xmlns:pns="http://service" type="tns:User" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="validateUser" qname="operNS:validateUser" xmlns:operNS="http://service" returnQName="retNS:validateUserReturn" xmlns:retNS="http://service" returnType="rtns:UserMessageBean" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:user_name" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="validateUser setUserBeanValues"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:UserMessageBean"
+        type="java:model.UserMessageBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:User"
+        type="java:model.User"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>validateUserResponse"
+        type="java:service.ValidateUserResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>setUserBeanValuesResponse"
+        type="java:service.SetUserBeanValuesResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>validateUser"
+        type="java:service.ValidateUser"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

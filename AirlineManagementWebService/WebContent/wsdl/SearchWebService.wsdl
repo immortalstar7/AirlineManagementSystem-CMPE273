@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://wrapper" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wrapper" xmlns:intf="http://wrapper" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://wrapper" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="searchStaff">
+    <complexType>
+     <sequence>
+      <element name="staff" type="tns1:Staff"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchStaffResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchStaffReturn" type="tns1:Staff"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlights">
+    <complexType>
+     <sequence>
+      <element name="source" type="xsd:string"/>
+      <element name="destination" type="xsd:string"/>
+      <element name="flight_date" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlightsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchFlightsReturn" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchCustomers">
+    <complexType>
+     <sequence>
+      <element name="customer" type="tns1:Customer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchCustomersResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchCustomersReturn" type="tns1:Customer"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Staff">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="dob" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="f_name" nillable="true" type="xsd:string"/>
+     <element name="hire_date" nillable="true" type="xsd:string"/>
+     <element name="l_name" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="position" nillable="true" type="xsd:string"/>
+     <element name="staff_ssn" type="xsd:int"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="work_desc" nillable="true" type="xsd:string"/>
+     <element name="zipcode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Flight">
+    <sequence>
+     <element name="flight_name" nillable="true" type="xsd:string"/>
+     <element name="flight_no" nillable="true" type="xsd:string"/>
+     <element name="no_of_seats" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="Customer">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="customer_ssn" type="xsd:int"/>
+     <element name="dob" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="f_name" nillable="true" type="xsd:string"/>
+     <element name="l_name" nillable="true" type="xsd:string"/>
+     <element name="nationality" nillable="true" type="xsd:string"/>
+     <element name="passport_no" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="zipcode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="searchStaffRequest">
+
+      <wsdl:part element="impl:searchStaff" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchFlightsRequest">
+
+      <wsdl:part element="impl:searchFlights" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchStaffResponse">
+
+      <wsdl:part element="impl:searchStaffResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchCustomersRequest">
+
+      <wsdl:part element="impl:searchCustomers" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchCustomersResponse">
+
+      <wsdl:part element="impl:searchCustomersResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchFlightsResponse">
+
+      <wsdl:part element="impl:searchFlightsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="SearchWebService">
+
+      <wsdl:operation name="searchStaff">
+
+         <wsdl:input message="impl:searchStaffRequest" name="searchStaffRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchStaffResponse" name="searchStaffResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlights">
+
+         <wsdl:input message="impl:searchFlightsRequest" name="searchFlightsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchFlightsResponse" name="searchFlightsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchCustomers">
+
+         <wsdl:input message="impl:searchCustomersRequest" name="searchCustomersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchCustomersResponse" name="searchCustomersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="SearchWebServiceSoapBinding" type="impl:SearchWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="searchStaff">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchStaffRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchStaffResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlights">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchFlightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchFlightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchCustomers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchCustomersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchCustomersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="SearchWebServiceService">
+
+      <wsdl:port binding="impl:SearchWebServiceSoapBinding" name="SearchWebService">
+
+         <wsdlsoap:address location="http://localhost:8083/AirlineManagementWebService/services/SearchWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

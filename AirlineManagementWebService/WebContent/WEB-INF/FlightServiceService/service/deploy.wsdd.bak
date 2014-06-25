@@ -1,0 +1,230 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FlightServiceService WSDL service -->
+
+  <service name="FlightService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service"/>
+      <parameter name="wsdlServiceElement" value="FlightServiceService"/>
+      <parameter name="schemaQualified" value="http://service,http://model"/>
+      <parameter name="wsdlServicePort" value="FlightService"/>
+      <parameter name="className" value="service.FlightServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FlightService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getFlightDetails" qname="operNS:getFlightDetails" xmlns:operNS="http://service" returnQName="retNS:getFlightDetailsReturn" xmlns:retNS="http://service" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://service" returnItemQName="tns:item" xmlns:tns="http://service" soapAction="" >
+      </operation>
+      <operation name="scheduleNewFlight" qname="operNS:scheduleNewFlight" xmlns:operNS="http://service" returnQName="retNS:scheduleNewFlightReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flightNo" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:source" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:seats" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fare" xmlns:pns="http://service" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:staff" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUserBookingDetails" qname="operNS:getUserBookingDetails" xmlns:operNS="http://service" returnQName="retNS:getUserBookingDetailsReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="executeflightdetailsQuery" qname="operNS:executeflightdetailsQuery" xmlns:operNS="http://service" returnQName="retNS:executeflightdetailsQueryReturn" xmlns:retNS="http://service" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://service" returnItemQName="tns:item" xmlns:tns="http://service" soapAction="" >
+        <parameter qname="pns:querystr" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="payment" qname="operNS:payment" xmlns:operNS="http://service" returnQName="retNS:paymentReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userid" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNo" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="bookFlights" qname="operNS:bookFlights" xmlns:operNS="http://service" returnQName="retNS:bookFlightsReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userid" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNo" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="updateFlight" qname="operNS:updateFlight" xmlns:operNS="http://service" returnQName="retNS:updateFlightReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flightNo" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:currDate" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:updatedate" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:source" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addFlights" qname="operNS:addFlights" xmlns:operNS="http://service" returnQName="retNS:addFlightsReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flight" xmlns:pns="http://service" type="tns:Flight" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="cancelBooking" qname="operNS:cancelBooking" xmlns:operNS="http://service" returnQName="retNS:cancelBookingReturn" xmlns:retNS="http://service" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNo" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date" xmlns:pns="http://service" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://service" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="payment getUserBookingDetails bookFlights updateFlight scheduleNewFlight getFlightDetails addFlights cancelBooking executeflightdetailsQuery"/>
+
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>getFlightDetails"
+        type="java:service.GetFlightDetails"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>scheduleNewFlight"
+        type="java:service.ScheduleNewFlight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://service"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>cancelBooking"
+        type="java:service.CancelBooking"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>getUserBookingDetails"
+        type="java:service.GetUserBookingDetails"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>cancelBookingResponse"
+        type="java:service.CancelBookingResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Flight"
+        type="java:model.Flight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>getFlightDetailsResponse"
+        type="java:service.GetFlightDetailsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>paymentResponse"
+        type="java:service.PaymentResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>bookFlights"
+        type="java:service.BookFlights"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>payment"
+        type="java:service.Payment"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>addFlights"
+        type="java:service.AddFlights"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>scheduleNewFlightResponse"
+        type="java:service.ScheduleNewFlightResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>executeflightdetailsQuery"
+        type="java:service.ExecuteflightdetailsQuery"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>addFlightsResponse"
+        type="java:service.AddFlightsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>bookFlightsResponse"
+        type="java:service.BookFlightsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>updateFlight"
+        type="java:service.UpdateFlight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>getUserBookingDetailsResponse"
+        type="java:service.GetUserBookingDetailsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>executeflightdetailsQueryResponse"
+        type="java:service.ExecuteflightdetailsQueryResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://service"
+        qname="ns:>updateFlightResponse"
+        type="java:service.UpdateFlightResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

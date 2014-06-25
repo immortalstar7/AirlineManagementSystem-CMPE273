@@ -1,0 +1,85 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from LoginWebServiceService WSDL service -->
+
+  <service name="LoginWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://wrapper"/>
+      <parameter name="wsdlServiceElement" value="LoginWebServiceService"/>
+      <parameter name="schemaQualified" value="http://model,http://wrapper"/>
+      <parameter name="wsdlServicePort" value="LoginWebService"/>
+      <parameter name="className" value="wrapper.LoginWebServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="LoginWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="customerRegistration" qname="operNS:customerRegistration" xmlns:operNS="http://wrapper" returnQName="retNS:customerRegistrationReturn" xmlns:retNS="http://wrapper" returnType="rtns:CustomerMessageBean" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:customer" xmlns:pns="http://wrapper" type="tns:Customer" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="userValidation" qname="operNS:userValidation" xmlns:operNS="http://wrapper" returnQName="retNS:userValidationReturn" xmlns:retNS="http://wrapper" returnType="rtns:UserMessageBean" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:type" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="staffRegistration" qname="operNS:staffRegistration" xmlns:operNS="http://wrapper" returnQName="retNS:staffRegistrationReturn" xmlns:retNS="http://wrapper" returnType="rtns:StaffMessageBean" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:staff" xmlns:pns="http://wrapper" type="tns:Staff" xmlns:tns="http://model"/>
+      </operation>
+      <parameter name="allowedMethods" value="userValidation staffRegistration customerRegistration"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:UserMessageBean"
+        type="java:model.UserMessageBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:User"
+        type="java:model.User"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Customer"
+        type="java:model.Customer"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Staff"
+        type="java:model.Staff"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:StaffMessageBean"
+        type="java:model.StaffMessageBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:CustomerMessageBean"
+        type="java:model.CustomerMessageBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

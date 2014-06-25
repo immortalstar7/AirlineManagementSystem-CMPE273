@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Specify a JDBC datasource -->
+    <Resource name="jdbc/airline_management" auth="Container"
+        type="javax.sql.DataSource" username="root" password="root"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost/airline_management"
+        maxActive="1000" maxIdle="50" 
+        />
+ 		
+</Context>

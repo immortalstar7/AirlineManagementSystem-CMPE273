@@ -1,0 +1,74 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FlightWebServiceService WSDL service -->
+
+  <service name="FlightWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://wrapper"/>
+      <parameter name="wsdlServiceElement" value="FlightWebServiceService"/>
+      <parameter name="schemaQualified" value="http://model,http://wrapper"/>
+      <parameter name="wsdlServicePort" value="FlightWebService"/>
+      <parameter name="className" value="wrapper.FlightWebServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FlightWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getUserBookingDetails" qname="operNS:getUserBookingDetails" xmlns:operNS="http://wrapper" returnQName="retNS:getUserBookingDetailsReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:user_id" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="cancelUserBooking" qname="operNS:cancelUserBooking" xmlns:operNS="http://wrapper" returnQName="retNS:cancelUserBookingReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNum" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flyingDate" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="scheduleNewFlight" qname="operNS:scheduleNewFlight" xmlns:operNS="http://wrapper" returnQName="retNS:scheduleNewFlightReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flightNo" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightdate" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:source" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:seats" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fare" xmlns:pns="http://wrapper" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:staff" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="bookFlights" qname="operNS:bookFlights" xmlns:operNS="http://wrapper" returnQName="retNS:bookFlightsReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userId" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNum" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flyingDate" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addFlights" qname="operNS:addFlights" xmlns:operNS="http://wrapper" returnQName="retNS:addFlightsReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flight" xmlns:pns="http://wrapper" type="tns:Flight" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="updateFlight" qname="operNS:updateFlight" xmlns:operNS="http://wrapper" returnQName="retNS:updateFlightReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flightNo" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:currDate" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightdate" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:source" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="payment" qname="operNS:payment" xmlns:operNS="http://wrapper" returnQName="retNS:paymentReturn" xmlns:retNS="http://wrapper" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:userid" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightNo" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:date" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:noOfSeats" xmlns:pns="http://wrapper" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="payment getUserBookingDetails bookFlights updateFlight scheduleNewFlight addFlights cancelUserBooking"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Flight"
+        type="java:model.Flight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

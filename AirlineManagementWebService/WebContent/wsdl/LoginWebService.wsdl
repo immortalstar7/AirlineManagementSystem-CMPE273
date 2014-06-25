@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://wrapper" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wrapper" xmlns:intf="http://wrapper" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://wrapper" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="customerRegistration">
+    <complexType>
+     <sequence>
+      <element name="customer" type="tns1:Customer"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="customerRegistrationResponse">
+    <complexType>
+     <sequence>
+      <element name="customerRegistrationReturn" type="tns1:CustomerMessageBean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="userValidation">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="type" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="userValidationResponse">
+    <complexType>
+     <sequence>
+      <element name="userValidationReturn" type="tns1:UserMessageBean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="staffRegistration">
+    <complexType>
+     <sequence>
+      <element name="staff" type="tns1:Staff"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="staffRegistrationResponse">
+    <complexType>
+     <sequence>
+      <element name="staffRegistrationReturn" type="tns1:StaffMessageBean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Customer">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="customer_ssn" type="xsd:int"/>
+     <element name="dob" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="f_name" nillable="true" type="xsd:string"/>
+     <element name="l_name" nillable="true" type="xsd:string"/>
+     <element name="nationality" nillable="true" type="xsd:string"/>
+     <element name="passport_no" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="zipcode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CustomerMessageBean">
+    <sequence>
+     <element name="customer" nillable="true" type="tns1:Customer"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="User">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="dob" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="f_name" nillable="true" type="xsd:string"/>
+     <element name="l_name" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="zipcode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="UserMessageBean">
+    <sequence>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="user" nillable="true" type="tns1:User"/>
+    </sequence>
+   </complexType>
+   <complexType name="Staff">
+    <sequence>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="dob" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="f_name" nillable="true" type="xsd:string"/>
+     <element name="hire_date" nillable="true" type="xsd:string"/>
+     <element name="l_name" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="position" nillable="true" type="xsd:string"/>
+     <element name="staff_ssn" type="xsd:int"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="user_id" type="xsd:int"/>
+     <element name="work_desc" nillable="true" type="xsd:string"/>
+     <element name="zipcode" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="StaffMessageBean">
+    <sequence>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="staff" nillable="true" type="tns1:Staff"/>
+     <element name="user_id" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="staffRegistrationRequest">
+
+      <wsdl:part element="impl:staffRegistration" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="staffRegistrationResponse">
+
+      <wsdl:part element="impl:staffRegistrationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="customerRegistrationRequest">
+
+      <wsdl:part element="impl:customerRegistration" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="userValidationResponse">
+
+      <wsdl:part element="impl:userValidationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="customerRegistrationResponse">
+
+      <wsdl:part element="impl:customerRegistrationResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="userValidationRequest">
+
+      <wsdl:part element="impl:userValidation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="LoginWebService">
+
+      <wsdl:operation name="customerRegistration">
+
+         <wsdl:input message="impl:customerRegistrationRequest" name="customerRegistrationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:customerRegistrationResponse" name="customerRegistrationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userValidation">
+
+         <wsdl:input message="impl:userValidationRequest" name="userValidationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:userValidationResponse" name="userValidationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="staffRegistration">
+
+         <wsdl:input message="impl:staffRegistrationRequest" name="staffRegistrationRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:staffRegistrationResponse" name="staffRegistrationResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="LoginWebServiceSoapBinding" type="impl:LoginWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="customerRegistration">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="customerRegistrationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="customerRegistrationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="userValidation">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="userValidationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="userValidationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="staffRegistration">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="staffRegistrationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="staffRegistrationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="LoginWebServiceService">
+
+      <wsdl:port binding="impl:LoginWebServiceSoapBinding" name="LoginWebService">
+
+         <wsdlsoap:address location="http://localhost:8083/AirlineManagementWebService/services/LoginWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

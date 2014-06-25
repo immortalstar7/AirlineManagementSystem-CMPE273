@@ -1,0 +1,61 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SearchWebServiceService WSDL service -->
+
+  <service name="SearchWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://wrapper"/>
+      <parameter name="wsdlServiceElement" value="SearchWebServiceService"/>
+      <parameter name="schemaQualified" value="http://model,http://wrapper"/>
+      <parameter name="wsdlServicePort" value="SearchWebService"/>
+      <parameter name="className" value="wrapper.SearchWebServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="SearchWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="searchStaff" qname="operNS:searchStaff" xmlns:operNS="http://wrapper" returnQName="retNS:searchStaffReturn" xmlns:retNS="http://wrapper" returnType="rtns:Staff" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:staff" xmlns:pns="http://wrapper" type="tns:Staff" xmlns:tns="http://model"/>
+      </operation>
+      <operation name="searchFlights" qname="operNS:searchFlights" xmlns:operNS="http://wrapper" returnQName="retNS:searchFlightsReturn" xmlns:retNS="http://wrapper" returnType="rtns:Flight" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:source" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:destination" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flight_date" xmlns:pns="http://wrapper" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="searchCustomers" qname="operNS:searchCustomers" xmlns:operNS="http://wrapper" returnQName="retNS:searchCustomersReturn" xmlns:retNS="http://wrapper" returnType="rtns:Customer" xmlns:rtns="http://model" soapAction="" >
+        <parameter qname="pns:customer" xmlns:pns="http://wrapper" type="tns:Customer" xmlns:tns="http://model"/>
+      </operation>
+      <parameter name="allowedMethods" value="searchFlights searchCustomers searchStaff"/>
+
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Customer"
+        type="java:model.Customer"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Staff"
+        type="java:model.Staff"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model"
+        qname="ns:Flight"
+        type="java:model.Flight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

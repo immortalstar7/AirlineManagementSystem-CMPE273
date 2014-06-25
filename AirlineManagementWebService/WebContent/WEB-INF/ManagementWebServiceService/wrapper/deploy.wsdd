@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ManagementWebServiceService WSDL service -->
+
+  <service name="ManagementWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://wrapper"/>
+      <parameter name="wsdlServiceElement" value="ManagementWebServiceService"/>
+      <parameter name="schemaQualified" value="http://model,http://wrapper"/>
+      <parameter name="wsdlServicePort" value="ManagementWebService"/>
+      <parameter name="className" value="wrapper.ManagementWebService"/>
+      <parameter name="wsdlPortType" value="ManagementWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateCustomerInfo" qname="operNS:updateCustomerInfo" returnQName="retNS:updateCustomerInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://model" qname="pns:customer" type="tns:Customer"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteCustomer" qname="operNS:deleteCustomer" returnQName="retNS:deleteCustomerReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:cust_Id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://model" name="getStaffInfo" qname="operNS:getStaffInfo" returnQName="retNS:getStaffInfoReturn" returnType="rtns:Staff" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:staff_Id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteStaff" qname="operNS:deleteStaff" returnQName="retNS:deleteStaffReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:staff_Id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://model" name="getFlightInfo" qname="operNS:getFlightInfo" returnQName="retNS:getFlightInfoReturn" returnType="rtns:FlightDetails" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:flight_Num" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteFlight" qname="operNS:deleteFlight" returnQName="retNS:deleteFlightReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:flight_Num" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://model" name="getCustomerInfo" qname="operNS:getCustomerInfo" returnQName="retNS:getCustomerInfoReturn" returnType="rtns:Customer" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:user_id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://model" name="listFlightAndCustomer" qname="operNS:listFlightAndCustomer" returnQName="retNS:listFlightAndCustomerReturn" returnType="rtns:FlightCustomerBean" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:flight_Num" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateFlightInfo" qname="operNS:updateFlightInfo" returnQName="retNS:updateFlightInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://model" qname="pns:flight" type="tns:Flight"/>
+      </operation>
+      <operation xmlns:operNS="http://wrapper" xmlns:retNS="http://wrapper" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateStaffInfo" qname="operNS:updateStaffInfo" returnQName="retNS:updateStaffInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://wrapper" xmlns:tns="http://model" qname="pns:staff" type="tns:Staff"/>
+      </operation>
+      <parameter name="allowedMethods" value="listFlightAndCustomer updateFlightInfo getFlightInfo getStaffInfo getCustomerInfo updateCustomerInfo updateStaffInfo deleteCustomer deleteStaff deleteFlight"/>
+
+      <typeMapping xmlns:ns="http://model" qname="ns:Flight" type="java:model.Flight" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:FlightDetails" type="java:model.FlightDetails" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:FlightCustomerBean" type="java:model.FlightCustomerBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:Customer" type="java:model.Customer" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://model" qname="ns:Staff" type="java:model.Staff" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

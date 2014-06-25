@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://wrapper" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wrapper" xmlns:intf="http://wrapper" xmlns:tns1="http://model" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://wrapper" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model"/>
+   <element name="getUserBookingDetails">
+    <complexType>
+     <sequence>
+      <element name="user_id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getUserBookingDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="getUserBookingDetailsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelUserBooking">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+      <element name="flightNum" type="xsd:string"/>
+      <element name="flyingDate" type="xsd:string"/>
+      <element name="noOfSeats" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelUserBookingResponse">
+    <complexType>
+     <sequence>
+      <element name="cancelUserBookingReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="scheduleNewFlight">
+    <complexType>
+     <sequence>
+      <element name="flightNo" type="xsd:string"/>
+      <element name="flightdate" type="xsd:string"/>
+      <element name="source" type="xsd:string"/>
+      <element name="dest" type="xsd:string"/>
+      <element name="seats" type="xsd:int"/>
+      <element name="fare" type="xsd:double"/>
+      <element maxOccurs="unbounded" name="staff" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="scheduleNewFlightResponse">
+    <complexType>
+     <sequence>
+      <element name="scheduleNewFlightReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="bookFlights">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:int"/>
+      <element name="flightNum" type="xsd:string"/>
+      <element name="flyingDate" type="xsd:string"/>
+      <element name="noOfSeats" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="bookFlightsResponse">
+    <complexType>
+     <sequence>
+      <element name="bookFlightsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addFlights">
+    <complexType>
+     <sequence>
+      <element name="flight" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addFlightsResponse">
+    <complexType>
+     <sequence>
+      <element name="addFlightsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateFlight">
+    <complexType>
+     <sequence>
+      <element name="flightNo" type="xsd:string"/>
+      <element name="currDate" type="xsd:string"/>
+      <element name="flightdate" type="xsd:string"/>
+      <element name="source" type="xsd:string"/>
+      <element name="dest" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateFlightResponse">
+    <complexType>
+     <sequence>
+      <element name="updateFlightReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="payment">
+    <complexType>
+     <sequence>
+      <element name="userid" type="xsd:int"/>
+      <element name="flightNo" type="xsd:string"/>
+      <element name="date" type="xsd:string"/>
+      <element name="noOfSeats" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="paymentResponse">
+    <complexType>
+     <sequence>
+      <element name="paymentReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Flight">
+    <sequence>
+     <element name="flight_name" nillable="true" type="xsd:string"/>
+     <element name="flight_no" nillable="true" type="xsd:string"/>
+     <element name="no_of_seats" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="addFlightsResponse">
+
+      <wsdl:part element="impl:addFlightsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightResponse">
+
+      <wsdl:part element="impl:updateFlightResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="paymentRequest">
+
+      <wsdl:part element="impl:payment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightRequest">
+
+      <wsdl:part element="impl:updateFlight" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="scheduleNewFlightResponse">
+
+      <wsdl:part element="impl:scheduleNewFlightResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="bookFlightsRequest">
+
+      <wsdl:part element="impl:bookFlights" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="scheduleNewFlightRequest">
+
+      <wsdl:part element="impl:scheduleNewFlight" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelUserBookingRequest">
+
+      <wsdl:part element="impl:cancelUserBooking" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addFlightsRequest">
+
+      <wsdl:part element="impl:addFlights" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserBookingDetailsResponse">
+
+      <wsdl:part element="impl:getUserBookingDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelUserBookingResponse">
+
+      <wsdl:part element="impl:cancelUserBookingResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="paymentResponse">
+
+      <wsdl:part element="impl:paymentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUserBookingDetailsRequest">
+
+      <wsdl:part element="impl:getUserBookingDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="bookFlightsResponse">
+
+      <wsdl:part element="impl:bookFlightsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FlightWebService">
+
+      <wsdl:operation name="getUserBookingDetails">
+
+         <wsdl:input message="impl:getUserBookingDetailsRequest" name="getUserBookingDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUserBookingDetailsResponse" name="getUserBookingDetailsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelUserBooking">
+
+         <wsdl:input message="impl:cancelUserBookingRequest" name="cancelUserBookingRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:cancelUserBookingResponse" name="cancelUserBookingResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="scheduleNewFlight">
+
+         <wsdl:input message="impl:scheduleNewFlightRequest" name="scheduleNewFlightRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:scheduleNewFlightResponse" name="scheduleNewFlightResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="bookFlights">
+
+         <wsdl:input message="impl:bookFlightsRequest" name="bookFlightsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:bookFlightsResponse" name="bookFlightsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addFlights">
+
+         <wsdl:input message="impl:addFlightsRequest" name="addFlightsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addFlightsResponse" name="addFlightsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateFlight">
+
+         <wsdl:input message="impl:updateFlightRequest" name="updateFlightRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateFlightResponse" name="updateFlightResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="payment">
+
+         <wsdl:input message="impl:paymentRequest" name="paymentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:paymentResponse" name="paymentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FlightWebServiceSoapBinding" type="impl:FlightWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getUserBookingDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUserBookingDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUserBookingDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelUserBooking">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="cancelUserBookingRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancelUserBookingResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="scheduleNewFlight">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="scheduleNewFlightRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="scheduleNewFlightResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="bookFlights">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="bookFlightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="bookFlightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addFlights">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addFlightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addFlightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateFlight">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateFlightRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateFlightResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="payment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="paymentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="paymentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FlightWebServiceService">
+
+      <wsdl:port binding="impl:FlightWebServiceSoapBinding" name="FlightWebService">
+
+         <wsdlsoap:address location="http://localhost:8083/AirlineManagementWebService/services/FlightWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
